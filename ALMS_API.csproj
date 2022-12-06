@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="GlobalVariable\" />
+    <Folder Include="LMS\" />
   </ItemGroup>
 
 </Project>
