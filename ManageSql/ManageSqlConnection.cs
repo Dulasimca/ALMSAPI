@@ -153,5 +153,47 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
+    
+
+
+//library register
+
+public bool Insertlibrarienregister(librarienregisterEntity librarienregisterEntity)
+{
+
+    sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+    DataSet ds = new DataSet();
+    sqlCommand = new NpgsqlCommand();
+    try
+    {
+        if (sqlConnection.State == 0)
+        {
+            sqlConnection.Open();
+        }
+        sqlCommand.Connection = sqlConnection;
+        sqlCommand.CommandText = "call insertlibrarienregister(@sno,@username,@email,@password,@confirmpassword)";
+        sqlCommand.CommandType = CommandType.Text;
+        sqlCommand.Parameters.AddWithValue("@sno", librarienregisterEntity.sno);
+        sqlCommand.Parameters.AddWithValue("@username", librarienregisterEntity.username);
+        sqlCommand.Parameters.AddWithValue("@email", librarienregisterEntity.email);
+        sqlCommand.Parameters.AddWithValue("@password", librarienregisterEntity.password);
+        sqlCommand.Parameters.AddWithValue("@confirmpassword", librarienregisterEntity.confirmpassword);
+                sqlCommand.ExecuteNonQuery();
+
+        return true;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        throw ex;
+    }
+    finally
+    {
+        sqlConnection.Close();
+        sqlCommand.Dispose();
+        ds.Dispose();
+        dataAdapter = null;
+    }
+}
     }
 }
