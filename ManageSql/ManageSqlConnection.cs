@@ -153,5 +153,50 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
+
+        public bool Insertitregister(itregisterEntity itregisterEntity)
+        {
+
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertitregister(@sno,@name,@employeeid,@email,@password,@confirmpassword)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@sno", itregisterEntity.sno);
+                sqlCommand.Parameters.AddWithValue("@name", itregisterEntity.name);
+                sqlCommand.Parameters.AddWithValue("@employeeid", itregisterEntity.employeeid);
+                sqlCommand.Parameters.AddWithValue("@email", itregisterEntity.email);
+                sqlCommand.Parameters.AddWithValue("@password", itregisterEntity.password);
+                sqlCommand.Parameters.AddWithValue("@confirmpassword", itregisterEntity.confirmpassword);
+
+                sqlCommand.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+        
+            }
+        }
+
+
+
     }
 }
+
