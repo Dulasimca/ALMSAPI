@@ -119,7 +119,159 @@ namespace ALMS_API.ManageSQL
             }
         }
 
-        public bool Inserttest(TestEntity TestEntity)
+
+
+        //GetFlashNewsEntry
+        public DataSet GetBookCategoryMaster()
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "select * from getbookcategorymaster()";
+                sqlCommand.CommandType = CommandType.Text;
+                dataAdapter = new NpgsqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(ds);
+                return ds;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+        public DataSet GetLanguageMaster()
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "select * from getlanguagemaster()";
+                sqlCommand.CommandType = CommandType.Text;
+                dataAdapter = new NpgsqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(ds);
+                return ds;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+            public DataSet GetBookEditionMaster()
+            {
+                sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+                DataSet ds = new DataSet();
+                sqlCommand = new NpgsqlCommand();
+                try
+                {
+                    if (sqlConnection.State == 0)
+                    {
+                        sqlConnection.Open();
+                    }
+                    sqlCommand.Connection = sqlConnection;
+                    sqlCommand.CommandText = "select * from geteditionmaster()";
+                    sqlCommand.CommandType = CommandType.Text;
+                    dataAdapter = new NpgsqlDataAdapter(sqlCommand);
+                    dataAdapter.Fill(ds);
+                    return ds;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    sqlCommand.Dispose();
+                    ds.Dispose();
+                    dataAdapter = null;
+                }
+            }
+        public bool insertbook(BookEntity BookEntity)
+        {
+
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertbook(@bookid,@languageid,@bookname,@author,@bookcategoryid,@editionid,@publisheddate,@copies,@remarks,@flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@bookid", BookEntity.bookid);
+                sqlCommand.Parameters.AddWithValue("@languageid", BookEntity.languageid);
+                sqlCommand.Parameters.AddWithValue("@bookname", BookEntity.bookname);
+                sqlCommand.Parameters.AddWithValue("@author", BookEntity.author);
+                sqlCommand.Parameters.AddWithValue("@bookcategoryid", BookEntity.bookcategoryid);
+                sqlCommand.Parameters.AddWithValue("@editionid", BookEntity.editionid);
+                sqlCommand.Parameters.AddWithValue("@publisheddate", BookEntity.publisheddate);
+                sqlCommand.Parameters.AddWithValue("@copies", BookEntity.copies);
+                sqlCommand.Parameters.AddWithValue("@remarks", BookEntity.remarks);
+                sqlCommand.Parameters.AddWithValue("@flag", BookEntity.flag);
+                sqlCommand.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public DataSet GetBook()
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "select * from book_master";
+                sqlCommand.CommandType = CommandType.Text;
+                dataAdapter = new NpgsqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(ds);
+                return ds;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+
+            public bool Inserttest(TestEntity TestEntity)
         {
 
             sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
@@ -153,6 +305,7 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
+<<<<<<< HEAD
 
         public bool Insertitregister(itregisterEntity itregisterEntity)
         {
@@ -197,6 +350,50 @@ namespace ALMS_API.ManageSQL
 
 
 
+=======
+    
+
+
+//library register
+
+public bool Insertlibrarienregister(librarienregisterEntity librarienregisterEntity)
+{
+
+    sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+    DataSet ds = new DataSet();
+    sqlCommand = new NpgsqlCommand();
+    try
+    {
+        if (sqlConnection.State == 0)
+        {
+            sqlConnection.Open();
+        }
+        sqlCommand.Connection = sqlConnection;
+        sqlCommand.CommandText = "call insertlibrarienregister(@sno,@username,@email,@password,@confirmpassword)";
+        sqlCommand.CommandType = CommandType.Text;
+        sqlCommand.Parameters.AddWithValue("@sno", librarienregisterEntity.sno);
+        sqlCommand.Parameters.AddWithValue("@username", librarienregisterEntity.username);
+        sqlCommand.Parameters.AddWithValue("@email", librarienregisterEntity.email);
+        sqlCommand.Parameters.AddWithValue("@password", librarienregisterEntity.password);
+        sqlCommand.Parameters.AddWithValue("@confirmpassword", librarienregisterEntity.confirmpassword);
+                sqlCommand.ExecuteNonQuery();
+
+        return true;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        throw ex;
+    }
+    finally
+    {
+        sqlConnection.Close();
+        sqlCommand.Dispose();
+        ds.Dispose();
+        dataAdapter = null;
+    }
+}
+>>>>>>> 84c8d185cdea12f50708bfc9089f1a7b7f48b85f
     }
 }
 

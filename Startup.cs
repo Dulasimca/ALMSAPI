@@ -43,6 +43,14 @@ namespace ALMS_API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ALMS_API v1"));
             }
+            
+            app.UseCors(options =>
+           options.WithOrigins("http://localhost:4200")
+        .AllowAnyMethod()
+   .AllowAnyHeader()
+   .AllowCredentials()
+   .SetIsOriginAllowed((host) => true)
+   );
 
             app.UseHttpsRedirection();
 
