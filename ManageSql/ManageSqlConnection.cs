@@ -388,6 +388,75 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
+
+        //getlibrarienregister
+
+        public DataSet librarienregisterget()
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "select * from getlibrarienregister()";
+                sqlCommand.CommandType = CommandType.Text;
+                dataAdapter = new NpgsqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(ds);
+                return ds;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+
+        //updatelibrareinregister
+
+        public bool updatelibrarienregister(updatelibrarienregisterEntity updatelibrarienregisterEntity)
+        {
+
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatelibrarienregister(@v_id,@v_username,@v_email,@v_password,@v_confirmpassword)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_id", updatelibrarienregisterEntity.v_id);
+                sqlCommand.Parameters.AddWithValue("@v_username", updatelibrarienregisterEntity.v_username);
+                sqlCommand.Parameters.AddWithValue("@email", updatelibrarienregisterEntity.v_email);
+                sqlCommand.Parameters.AddWithValue("@password", updatelibrarienregisterEntity.v_password);
+                sqlCommand.Parameters.AddWithValue("@confirmpassword", updatelibrarienregisterEntity.v_confirmpassword);
+                sqlCommand.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
     }
 }
 
