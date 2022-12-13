@@ -1,33 +1,32 @@
-﻿using ALMS_API.ManageSQL;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using Newtonsoft.Json;
+using ALMS_API.ManageSQL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace ALMS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookCategoryMaster : Controller
+    public class CollegeMaster : Controller
     {
         [HttpGet]
-        public string GetBookCategoryMaster()
+        public string GetCollegeMaster()
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
 
-                var result = manageSQL.GetBookCategoryMaster();
+                var result = manageSQL.GetCollegeMaster();
                 return JsonConvert.SerializeObject(result);
             }
         }
     }
-    public class BookCategoryMasterEntity
+    public class CollegeMasterrEntity
     {
-        public int bookcategoryid { get; set; }
-        public string bookcategoryname { get; set; }
+        public int collegeid { get; set; }
+        public string collegename { get; set; }
         public bool flag { get; set; }
 
     }

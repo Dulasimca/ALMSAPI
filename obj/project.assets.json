@@ -449,23 +449,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ananthan_10714\\.nuget\\packages\\": {},
+    "C:\\Users\\Priyadharshini_T798\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\project angular 1\\ALMS API\\ALMS API\\ALMS_API.csproj",
+      "projectUniqueName": "D:\\ALMSAPI\\ALMSAPI\\ALMS_API.csproj",
       "projectName": "ALMS_API",
-      "projectPath": "D:\\project angular 1\\ALMS API\\ALMS API\\ALMS_API.csproj",
-      "packagesPath": "C:\\Users\\Ananthan_10714\\.nuget\\packages\\",
-      "outputPath": "D:\\project angular 1\\ALMS API\\ALMS API\\obj\\",
+      "projectPath": "D:\\ALMSAPI\\ALMSAPI\\ALMS_API.csproj",
+      "packagesPath": "C:\\Users\\Priyadharshini_T798\\.nuget\\packages\\",
+      "outputPath": "D:\\ALMSAPI\\ALMSAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ananthan_10714\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Priyadharshini_T798\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

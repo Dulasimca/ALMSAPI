@@ -8,12 +8,14 @@ namespace ALMS_API.Controllers
     [ApiController]
     public class librarienregisterget : Controller
     {
+
         [HttpGet(nameof(GetLibrarienRegister))]
         public string GetLibrarienRegister()
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
-                var result = manageSQL.librarienregisterget();
+                var result = manageSQL.Getlibrarain();
+
                 return JsonConvert.SerializeObject(result);
             }
         }
@@ -27,3 +29,4 @@ namespace ALMS_API.Controllers
         public string confirmpassword { get; set; }
     }
 }
+ 

@@ -20,8 +20,8 @@ namespace ALMS_API.Controllers
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
 
-                var result = manageSQL.updatelibrarienregister(updatelibrarienregisterEntity);
-                return JsonConvert.SerializeObject(result);
+               //var result = manageSQL.updatelibrarienregister(updatelibrarienregisterEntity);
+                return JsonConvert.SerializeObject(null);
             }
             catch (Exception ex)
             {
