@@ -13,6 +13,7 @@ namespace ALMS_API.Controllers
     public class LanguageMaster : Controller
     {
 
+
         [HttpGet]
         public string GetLanguageMaster()
         {

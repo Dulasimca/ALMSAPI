@@ -12,8 +12,8 @@ namespace ALMS_API.Controllers
     [ApiController]
     public class BookEdition : Controller
     {
-        [HttpGet]
 
+        [HttpGet]
         public string GetBookEditionMaster()
         {
             {

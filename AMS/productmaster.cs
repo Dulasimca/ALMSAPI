@@ -7,28 +7,35 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
+
 namespace ALMS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookCategoryMaster : Controller
+    public class productmaster : ControllerBase
+
     {
-        [HttpGet]
-        public string GetBookCategoryMaster()
+        [HttpGet(nameof(Getproductmaster))]
+
+        public string Getproductmaster()
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
 
-                var result = manageSQL.GetBookCategoryMaster();
+                var result = manageSQL.Getproductmaster();
                 return JsonConvert.SerializeObject(result);
             }
         }
     }
-    public class BookCategoryMasterEntity
+    public class productmasterEntity
     {
-        public int bookcategoryid { get; set; }
-        public string bookcategoryname { get; set; }
+        public int productid { get; set; }
+        public string productname { get; set; }
         public bool flag { get; set; }
 
     }
 }
+
+
+
+

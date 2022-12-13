@@ -12,7 +12,7 @@ namespace ALMS_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class Book : Controller
-    {
+    { 
         [HttpPost(("{id}"))]
 
         public string Post(BookEntity BookEntity)
