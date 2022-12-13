@@ -10,24 +10,24 @@ namespace ALMS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookEdition : Controller
+    public class GenderMaster : Controller
     {
-        [HttpGet]
 
-        public string GetBookEditionMaster()
+        [HttpGet]
+        public string GetGenderMaster()
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
 
-                var result = manageSQL.GetBookEditionMaster();
+                var result = manageSQL.GetGenderMaster();
                 return JsonConvert.SerializeObject(result);
             }
         }
     }
-    public class BookEditionMasterEntity
+    public class GenderMasterEntity
     {
-        public int editionid { get; set; }
-        public string editionname { get; set; }
+        public int languageid { get; set; }
+        public string languagename { get; set; }
         public bool flag { get; set; }
 
     }

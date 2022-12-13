@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using Newtonsoft.Json;
 using ALMS_API.ManageSQL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,24 +10,23 @@ namespace ALMS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookEdition : Controller
+    public class CollegeMaster : Controller
     {
         [HttpGet]
-
-        public string GetBookEditionMaster()
+        public string GetCollegeMaster()
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
 
-                var result = manageSQL.GetBookEditionMaster();
+                var result = manageSQL.GetCollegeMaster();
                 return JsonConvert.SerializeObject(result);
             }
         }
     }
-    public class BookEditionMasterEntity
+    public class CollegeMasterrEntity
     {
-        public int editionid { get; set; }
-        public string editionname { get; set; }
+        public int collegeid { get; set; }
+        public string collegename { get; set; }
         public bool flag { get; set; }
 
     }

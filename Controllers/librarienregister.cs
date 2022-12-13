@@ -14,13 +14,13 @@ namespace ALMS_API.Controllers
     [ApiController]
     public class librarienregister : ControllerBase
     {
-        [HttpPost]
-        public string Post(librarienregisterEntity entity)
+        [HttpPost ("{id}")]
+        public string Post(librarienregisterEntity librarienregisterEntity)
         {
             try
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
-                var result = manageSQL.Insertlibrarienregister(entity);
+                var result = manageSQL.insertlibrarienregister(librarienregisterEntity);
                 return JsonConvert.SerializeObject(result);
             }
             catch (Exception ex)
@@ -29,7 +29,8 @@ namespace ALMS_API.Controllers
             }
             return "false";
         }
-    }
+      
+}
     public class librarienregisterEntity
     {
         public int sno { get; set; }
@@ -41,7 +42,6 @@ namespace ALMS_API.Controllers
         public string password { get; set; }
 
         public string confirmpassword { get; set; }
-
 
 
     }

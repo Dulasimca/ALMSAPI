@@ -14,7 +14,7 @@ namespace ALMS_API.Controllers
     public class BookCategoryMaster : Controller
     {
 
-        [HttpGet(nameof(GetBookCategoryMaster))]
+        [HttpGet]
         public string GetBookCategoryMaster()
         {
             {
