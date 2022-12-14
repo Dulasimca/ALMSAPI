@@ -13,9 +13,9 @@ namespace ALMS_API.Controllers
     [ApiController]
     public class Book : Controller
     { 
-   [HttpPost(nameof(Addbook))]
+        [HttpPost(("{id}"))]
 
-        public string Addbook(BookEntity BookEntity)
+        public string Post(BookEntity BookEntity)
     {
         try
         {
@@ -29,7 +29,7 @@ namespace ALMS_API.Controllers
         }
         return "false";
     }
-    [HttpGet(nameof(GetBook))]
+    [HttpGet]
     public string GetBook()
     {
         {
