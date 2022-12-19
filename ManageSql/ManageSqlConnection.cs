@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ALMS_API.Controllers;
+using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using ALMS_API.Controllers;
-using Npgsql;
 
 namespace ALMS_API.ManageSQL
 {
@@ -371,7 +371,7 @@ namespace ALMS_API.ManageSQL
             DataSet ds = new DataSet();
             sqlCommand = new NpgsqlCommand();
             try
-            {         
+            {
                 if (sqlConnection.State == 0)
                 {
                     sqlConnection.Open();
@@ -437,7 +437,7 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
-
+        //librarien register
 
         public DataSet Getlibrarain()
         {
@@ -451,7 +451,7 @@ namespace ALMS_API.ManageSQL
                     sqlConnection.Open();
                 }
                 sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandText = "select * from getlibrarienregister";
+                sqlCommand.CommandText = "select * from getlibrarienregister()";
                 sqlCommand.CommandType = CommandType.Text;
                 dataAdapter = new NpgsqlDataAdapter(sqlCommand);
                 dataAdapter.Fill(ds);
@@ -465,6 +465,7 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
+        // student reg insert
         public bool insertstudentreg(StudentregEntity StudentregEntity)
         {
             sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
@@ -645,7 +646,190 @@ namespace ALMS_API.ManageSQL
             }
         }
 
+        //update librarien regiater
+
+        public bool updatelibrarienregister(updatelibrarienregisterEntity updatelibrarienregisterEntity)
+        {
+
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatelibrarienregister(@v_id,@v_username,@v_email,@v_password,@v_confirmpassword)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_id", updatelibrarienregisterEntity.v_id);
+                sqlCommand.Parameters.AddWithValue("@v_username", updatelibrarienregisterEntity.v_username);
+                sqlCommand.Parameters.AddWithValue("@v_email", updatelibrarienregisterEntity.v_email);
+                sqlCommand.Parameters.AddWithValue("@v_password", updatelibrarienregisterEntity.v_password);
+                sqlCommand.Parameters.AddWithValue("@v_confirmpassword", updatelibrarienregisterEntity.v_confirmpassword);
+                sqlCommand.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+
+        //bookcategorymaster insert
+
+        public bool insertbookcategorymaster(Entity BookCategoryMaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertbookcategorymaster(@bookcategoryid,@bookcategoryname,@flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@bookcategoryid", BookCategoryMaster.bookcategoryid);
+                sqlCommand.Parameters.AddWithValue("@bookcategoryname", BookCategoryMaster.bookcategoryname);
+                sqlCommand.Parameters.AddWithValue("@flag", BookCategoryMaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+        //collegemaster insert
+        public bool insertcollegemaster(CollegeMasterEntity CollegeMaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertcollegemaster(@collegeid,@collegename,@flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@collegeid", CollegeMaster.collegeid);
+                sqlCommand.Parameters.AddWithValue("@collegename", CollegeMaster.collegename);
+                sqlCommand.Parameters.AddWithValue("@flag", CollegeMaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+        ///department insert method
+        ///
+
+
+        public bool insertdepartmentmaster(DepartmentMasterEntity DepartmentMaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertdepartmentmaster(@departmentid,@departmentname,@flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@departmentid", DepartmentMaster.departmentid);
+                sqlCommand.Parameters.AddWithValue("@departmentname", DepartmentMaster.departmentname);
+                sqlCommand.Parameters.AddWithValue("@flag", DepartmentMaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+
+        //Update collegemaster
+
+        public bool updatecollegemaster(updatecollegemasterEntity updatecollegemaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatecollegemaster(@v_collegeid,@v_collegename,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_collegeid", updatecollegemaster.collegeid);
+                sqlCommand.Parameters.AddWithValue("@v_collegename", updatecollegemaster.collegename);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updatecollegemaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
     }
-
 }
-
