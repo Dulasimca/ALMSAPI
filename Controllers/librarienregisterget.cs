@@ -4,6 +4,8 @@ using ALMS_API.ManageSQL;
 
 namespace ALMS_API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class librarienregisterget : Controller
     {
 
@@ -12,8 +14,8 @@ namespace ALMS_API.Controllers
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
+                var result = manageSQL.Getlibrarain();
 
-                var result = manageSQL.GetLanguageMaster();
                 return JsonConvert.SerializeObject(result);
             }
         }
@@ -21,14 +23,10 @@ namespace ALMS_API.Controllers
     public class LibrarienRegisterEntity
     {
         public int sno { get; set; }
-
         public string username { get; set; }
-
         public string email { get; set; }
-
         public string password { get; set; }
-
         public string confirmpassword { get; set; }
-
     }
 }
+ 

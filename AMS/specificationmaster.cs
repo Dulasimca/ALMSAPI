@@ -1,27 +1,24 @@
-﻿using ALMS_API.ManageSQL;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using Newtonsoft.Json;
+using ALMS_API.ManageSQL;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-
-namespace ALMS_API.Controllers
+namespace ALMS_API.AMS
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class productmaster : ControllerBase
+    public class specificationmaster : Controller
     {
         [HttpPost("{id}")]
 
-        public string Productmaster(productmasterEntity productmasterEntity)
+        public string Specificationmaster(specificationmasterEntity specificationmasterEntity)
         {
             try
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
-                var result = manageSQL.insertproductmaster(productmasterEntity);
+                var result = manageSQL.insertspecificationmaster(specificationmasterEntity);
                 return JsonConvert.SerializeObject(result);
             }
             catch (Exception ex)
@@ -31,27 +28,25 @@ namespace ALMS_API.Controllers
             return "false";
         }
         [HttpGet]
-        public string Getproductmaster()
+        public string Getspecificationmaster()
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
 
-                var result = manageSQL.Getproductmaster();
+                var result = manageSQL.Getspecificationmaster();
                 return JsonConvert.SerializeObject(result);
             }
         }
     }
-    public class productmasterEntity
+    public class specificationmasterEntity
     {
+        public int id { get; set; }
         public int productid { get; set; }
-        public string productname { get; set; }
+        public int brandid { get; set; }
+        public string name { get; set; }
+        public string specification { get; set; }
         public bool flag { get; set; }
 
 
     }
 }
-
-
-
-
-

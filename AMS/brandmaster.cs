@@ -12,16 +12,16 @@ namespace ALMS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class productmaster : ControllerBase
+    public class brandmaster : ControllerBase
     {
         [HttpPost("{id}")]
 
-        public string Productmaster(productmasterEntity productmasterEntity)
+        public string Brandmaster(brandmasterEntity brandmasterEntity)
         {
             try
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
-                var result = manageSQL.insertproductmaster(productmasterEntity);
+                var result = manageSQL.insertbrandmaster(brandmasterEntity);
                 return JsonConvert.SerializeObject(result);
             }
             catch (Exception ex)
@@ -31,25 +31,26 @@ namespace ALMS_API.Controllers
             return "false";
         }
         [HttpGet]
-        public string Getproductmaster()
+        public string Getbrandmaster()
         {
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
 
-                var result = manageSQL.Getproductmaster();
+                var result = manageSQL.Getbrandmaster();
                 return JsonConvert.SerializeObject(result);
             }
         }
     }
-    public class productmasterEntity
+    public class brandmasterEntity
     {
-        public int productid { get; set; }
-        public string productname { get; set; }
+        public int brandid { get; set; }
+        public string brandname { get; set; }
         public bool flag { get; set; }
 
 
     }
 }
+
 
 
 
