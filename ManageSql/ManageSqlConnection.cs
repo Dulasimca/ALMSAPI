@@ -45,6 +45,7 @@ namespace ALMS_API.ManageSQL
 
         }
 
+ 
         public DataSet GetDataSetValues(string procedureName, List<KeyValuePair<string, string>> parameterList)
         {
             sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
@@ -516,7 +517,317 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
-
+        public bool insertlanguagemaster(LanguageMasterEntity LanguageMasterEntity)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertlanguagemaster(@languageid,@languagename,@flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@languageid", LanguageMasterEntity.languageid);
+                sqlCommand.Parameters.AddWithValue("@languagename", LanguageMasterEntity.languagename);
+                sqlCommand.Parameters.AddWithValue("@flag", LanguageMasterEntity.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool inserteditionmaster(BookEditionEntity BookEditionEntity)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call inserteditionmaster(@editionid,@editionname,@flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@editionid", BookEditionEntity.editionid);
+                sqlCommand.Parameters.AddWithValue("@editionname", BookEditionEntity.editionname);
+                sqlCommand.Parameters.AddWithValue("@flag", BookEditionEntity.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool insertcoursemaster(CourseMasterEntity CourseMasterEntity)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertcoursemaster(@courseid,@coursename,@flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@courseid", CourseMasterEntity.courseid);
+                sqlCommand.Parameters.AddWithValue("@coursename", CourseMasterEntity.coursename);
+                sqlCommand.Parameters.AddWithValue("@flag", CourseMasterEntity.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool updatebookmaster(updatebookmasterEntity updatebookmaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatebookmaster(@v_bookid,@v_languageid,@v_bookname,@v_author,@v_bookcategoryid,@v_editionid,@v_publisheddate,@v_copies,@v_remarks,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_bookid", updatebookmaster.bookid);
+                sqlCommand.Parameters.AddWithValue("@v_languageid", updatebookmaster.languageid);
+                sqlCommand.Parameters.AddWithValue("@v_bookname", updatebookmaster.bookname);
+                sqlCommand.Parameters.AddWithValue("@v_author", updatebookmaster.author);
+                sqlCommand.Parameters.AddWithValue("@v_bookcategoryid", updatebookmaster.bookcategoryid);
+                sqlCommand.Parameters.AddWithValue("@v_editionid", updatebookmaster.editionid);
+                sqlCommand.Parameters.AddWithValue("@v_publisheddate", updatebookmaster.publisheddate);
+                sqlCommand.Parameters.AddWithValue("@v_copies", updatebookmaster.copies);
+                sqlCommand.Parameters.AddWithValue("@v_remarks", updatebookmaster.remarks);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updatebookmaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool updatelanguagemaster(updatelanguagemasterEntity updatelanguagemaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatelanguagemaster(@v_languageid,@v_languagename,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_languageid", updatelanguagemaster.languageid);
+                sqlCommand.Parameters.AddWithValue("@v_languagename", updatelanguagemaster.languagename);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updatelanguagemaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool updateeditionmaster(updateeditionmasterEntity updateeditionmaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updateeditionmaster(@v_editionid,@v_editionname,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_editionid", updateeditionmaster.editionid);
+                sqlCommand.Parameters.AddWithValue("@v_editionname", updateeditionmaster.editionname);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updateeditionmaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool updatecoursemaster(updatecoursemasterEntity updatecoursemaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatecoursemaster(@v_courseid,@v_coursename,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_courseid", updatecoursemaster.courseid);
+                sqlCommand.Parameters.AddWithValue("@v_coursename", updatecoursemaster.coursename);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updatecoursemaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool updatedepartmentmaster(updatedepartmentmasterEntity updatedepartmentmaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatedepartmentmaster(@v_departmentid,@v_departmentname,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_departmentid", updatedepartmentmaster.departmentid);
+                sqlCommand.Parameters.AddWithValue("@v_departmentname", updatedepartmentmaster.departmentname);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updatedepartmentmaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+        public bool updatestudentreg(updatestudentregEntity updatestudentreg)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatestudentreg(@vsno,@vfirstname,@vlastname,@vregno,@vgenderid,@vdob,@vage,@vemail,@vaddress,@vpincode,@vcollegeid,@vcourseid,@vdepartment,@vpassword,@vconfirmpassword,@vflag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@vsno", updatestudentreg.sno);
+                sqlCommand.Parameters.AddWithValue("@vfirstname", updatestudentreg.firstname);
+                sqlCommand.Parameters.AddWithValue("@vlastname", updatestudentreg.lastname);
+                sqlCommand.Parameters.AddWithValue("@vregno", updatestudentreg.regno);
+                sqlCommand.Parameters.AddWithValue("@vgenderid", updatestudentreg.genderid);
+                sqlCommand.Parameters.AddWithValue("@vdob", updatestudentreg.dob);
+                sqlCommand.Parameters.AddWithValue("@vage", updatestudentreg.age);
+                sqlCommand.Parameters.AddWithValue("@vemail", updatestudentreg.email);
+                sqlCommand.Parameters.AddWithValue("@vaddress", updatestudentreg.address);
+                sqlCommand.Parameters.AddWithValue("@vpincode", updatestudentreg.pincode);
+                sqlCommand.Parameters.AddWithValue("@vcollegeid", updatestudentreg.collegeid);
+                sqlCommand.Parameters.AddWithValue("@vcourseid", updatestudentreg.courseid);
+                sqlCommand.Parameters.AddWithValue("@vdepartment", updatestudentreg.department);
+                sqlCommand.Parameters.AddWithValue("@vpassword", updatestudentreg.password);
+                sqlCommand.Parameters.AddWithValue("@vconfirmpassword", updatestudentreg.confirmpassword);
+                sqlCommand.Parameters.AddWithValue("@vflag", updatestudentreg.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
         public DataSet Getstudentreg()
         {
             sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
