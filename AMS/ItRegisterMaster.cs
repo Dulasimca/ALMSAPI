@@ -7,39 +7,33 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-
 namespace ALMS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class itregister : ControllerBase
+    public class ItRegisterMaster : Controller
     {
-        [HttpPost("{id}")]
-        public string Post(itregisterEntity itregisterEntity)
+
+        [HttpGet(nameof(GetItRegister))]
+        public string GetItRegister()
         {
-            try
             {
                 ManageSQLConnection manageSQL = new ManageSQLConnection();
-                var result = manageSQL.Insertitregister(itregisterEntity);
+
+                var result = manageSQL.GetItRegister();
                 return JsonConvert.SerializeObject(result);
             }
-            catch (Exception ex)
-            {
-                //AuditLog.WriteError(ex.Message);
-            }
-            return "false";
         }
     }
-    public class itregisterEntity
+    public class GetItRegisterEntity
     {
         public int sno { get; set; }
         public string name { get; set; }
         public int employeeid { get; set; }
         public string email { get; set; }
-        public string password  { get; set; } 
+        public string password { get; set; }
         public string confirmpassword { get; set; }
+
 
     }
 }
-
-
