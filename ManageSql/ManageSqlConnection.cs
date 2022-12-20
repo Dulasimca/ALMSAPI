@@ -46,6 +46,7 @@ namespace ALMS_API.ManageSQL
 
         }
 
+      
         public DataSet GetDataSetValues(string procedureName, List<KeyValuePair<string, string>> parameterList)
         {
             sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
@@ -397,6 +398,45 @@ namespace ALMS_API.ManageSQL
             }
         }
 
+        //update brand master
+
+        public bool updatebrandmaster(updatebrandmasterEntity updatebrandmaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updatebrandmaster(@v_brandid,@v_brandname,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_brandid", updatebrandmaster.brandid);
+                sqlCommand.Parameters.AddWithValue("@v_brandname", updatebrandmaster.brandname);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updatebrandmaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
+
+
+
+
         //Insert specifaction Master
 
         public bool insertspecificationmaster(specificationmasterEntity specificationmasterEntity)
@@ -468,6 +508,75 @@ namespace ALMS_API.ManageSQL
                 dataAdapter = null;
             }
         }
+        //insert manage Asset
+        public bool insertmanageasset(manageassetEntity manageassetEntity)
+        {
+
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call insertmanageasset(@assetid,@productid,@brandid,@currentuser,@lastuser)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@assetid", manageassetEntity.assetid);
+                sqlCommand.Parameters.AddWithValue("@productid", manageassetEntity.productid);
+                sqlCommand.Parameters.AddWithValue("@brandid", manageassetEntity.brandid);
+                sqlCommand.Parameters.AddWithValue("@currentuser", manageassetEntity.currentuser);
+                sqlCommand.Parameters.AddWithValue("@lastuser", manageassetEntity.lastuser);
+                sqlCommand.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+
+            }
+        }
+
+        //get manageasset 
+
+        public DataSet getmanageasset()
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "select * from getmanageasset()";
+                sqlCommand.CommandType = CommandType.Text;
+                dataAdapter = new NpgsqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(ds);
+                return ds;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
+
 
         //library register
 
