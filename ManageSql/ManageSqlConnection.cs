@@ -361,7 +361,39 @@ namespace ALMS_API.ManageSQL
 
             }
         }
-
+        // update brandmaster
+        public bool updateproductmaster(updateproductmasterEntity updateproductmaster)
+        {
+            sqlConnection = new NpgsqlConnection(GlobalVariable.ConnectionStringForPostgreSQL);
+            DataSet ds = new DataSet();
+            sqlCommand = new NpgsqlCommand();
+            try
+            {
+                if (sqlConnection.State == 0)
+                {
+                    sqlConnection.Open();
+                }
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = "call updateproductmaster(@v_productid,@v_productname,@v_flag)";
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.Parameters.AddWithValue("@v_productid", updateproductmaster.productid);
+                sqlCommand.Parameters.AddWithValue("@v_productname", updateproductmaster.productname);
+                sqlCommand.Parameters.AddWithValue("@v_flag", updateproductmaster.flag);
+                sqlCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+                ds.Dispose();
+                dataAdapter = null;
+            }
+        }
         //Insert Brand Master
         public bool insertbrandmaster(brandmasterEntity brandmasterEntity)
         {
