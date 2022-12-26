@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace ALMS_API.AMS
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class specificationmaster : Controller
     {
         [HttpPost("{id}")]
